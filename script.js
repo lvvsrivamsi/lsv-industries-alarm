@@ -1,30 +1,30 @@
-// ===== ESP32 DETAILS =====
-const esp32IP = "http://192.168.29.204";
-const key = "LSV1234"; // Must match ESP32 key
+// ===== FIREBASE DATABASE URL =====
+const firebaseURL =
+  "https://lsv-industries-alarm-default-rtdb.asia-southeast1.firebasedatabase.app/alarm/status.json";
 
+// UI Elements
 let armed = false;
-
 const statusText = document.getElementById("statusText");
 const toggleBtn = document.getElementById("toggleBtn");
 const signalAnim = document.getElementById("signalAnim");
 
-// ---------------- LIVE STATUS SYNC ----------------
+// ---------------- FETCH STATUS ----------------
 async function fetchStatus() {
   try {
-    const res = await fetch(esp32IP + "/status");
-    const mode = await res.text();
+    const res = await fetch(firebaseURL);
+    const mode = await res.json();
 
-    armed = (mode.trim() === "armed");
+    armed = mode === "armed";
     updateUI();
   } catch (err) {
-    statusText.innerText = "ESP32 OFFLINE";
+    statusText.innerText = "CLOUD OFFLINE";
   }
 }
 
 // Auto refresh every 2 sec
 setInterval(fetchStatus, 2000);
 
-// ---------------- UI UPDATE ----------------
+// ---------------- UPDATE UI ----------------
 function updateUI() {
   if (armed) {
     statusText.innerText = "ARMED 🚨";
@@ -39,24 +39,22 @@ function updateUI() {
 
 // ---------------- TOGGLE BUTTON ----------------
 toggleBtn.addEventListener("click", async () => {
-
   toggleBtn.disabled = true;
   signalAnim.classList.remove("hidden");
 
-  // Stark delay animation (5 sec)
+  // 5 sec Stark animation delay
   setTimeout(async () => {
+    const newMode = armed ? "disarmed" : "armed";
 
-    if (!armed) {
-      await fetch(`${esp32IP}/arm?key=${key}`);
-    } else {
-      await fetch(`${esp32IP}/disarm?key=${key}`);
-    }
+    await fetch(firebaseURL, {
+      method: "PUT",
+      body: JSON.stringify(newMode),
+    });
 
     signalAnim.classList.add("hidden");
     toggleBtn.disabled = false;
 
     fetchStatus();
-
   }, 5000);
 });
 
