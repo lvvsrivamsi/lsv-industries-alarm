@@ -1,0 +1,169 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+
+  background: url("hud_bg.png") no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Dark overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 0;
+}
+
+/* Main container */
+.hud {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: 25px; /* tighter top spacing */
+}
+
+/* ===== LOGO BIG & CLEAN ===== */
+.logoImg {
+  width: 650px; /* BIG Stark Header */
+  max-width: 95%;
+
+  margin-top: 15px;
+  margin-bottom: 0px;
+
+  filter: drop-shadow(0 0 25px cyan);
+}
+
+/* ===== SUBTITLE CLOSE ===== */
+.subtitle {
+  font-size: 15px;
+  letter-spacing: 2px;
+
+  margin-top: 2px;       /* closer to logo */
+  margin-bottom: 20px;   /* less gap */
+
+  color: rgba(200, 255, 255, 0.7);
+}
+
+/* ===== STATUS BOX PERFECT ===== */
+.statusBox {
+  width: 520px;
+  max-width: 95%;
+
+  margin-top: 15px; /* closer upward */
+
+  padding: 26px;
+
+  border-radius: 18px;
+  border: 2px solid cyan;
+
+  background: rgba(0, 20, 35, 0.82);
+  box-shadow: 0 0 28px cyan;
+}
+
+.statusBox h2 {
+  margin: 0;
+  font-size: 20px;
+  opacity: 0.9;
+}
+
+.statusText {
+  font-size: 42px;
+  font-weight: bold;
+  margin-top: 14px;
+}
+
+/* ===== BUTTON MATCHING BOX ===== */
+button {
+  margin-top: 18px; /* tighter gap */
+
+  width: 520px;
+  max-width: 95%;
+
+  padding: 20px;
+  font-size: 26px;
+  font-weight: bold;
+
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  transition: 0.3s;
+}
+
+/* ARM button */
+.armBtn {
+  background: rgba(255, 0, 0, 0.9);
+  box-shadow: 0 0 30px red;
+}
+
+/* DISARM button */
+.disarmBtn {
+  background: rgba(0, 255, 0, 0.85);
+  color: black;
+  box-shadow: 0 0 30px lime;
+}
+
+/* Disabled */
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ===== SIGNAL ANIMATION ===== */
+#signalAnim {
+  margin-top: 18px;
+}
+
+.signalPath {
+  font-size: 34px;
+  margin: 10px;
+  animation: pulse 1s infinite;
+}
+
+.loader {
+  border: 6px solid rgba(255, 255, 255, 0.15);
+  border-top: 6px solid cyan;
+
+  border-radius: 50%;
+  width: 65px;
+  height: 65px;
+
+  margin: 12px auto;
+  animation: spin 1s linear infinite;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Animations */
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}

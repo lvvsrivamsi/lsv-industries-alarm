@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LSV INDUSTRIES SECURITY</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="hud">
+
+    <!-- LSV INDUSTRIES LOGO -->
+    <img src="lsv_logo.png" class="logoImg">
+    <p class="subtitle">LSV SECURITY CONTROL PANEL</p>
+
+    <!-- LIVE STATUS -->
+    <div class="statusBox">
+      <h2>Status</h2>
+      <div id="statusText" class="statusText">Loading...</div>
+    </div>
+
+    <!-- TOGGLE BUTTON -->
+    <button id="toggleBtn" class="armBtn">
+      ARM SYSTEM
+    </button>
+
+    <!-- SIGNAL ANIMATION -->
+    <div id="signalAnim" class="hidden">
+      <p>Sending Command...</p>
+      <div class="signalPath">
+        📱 ➝ 🛰️ ➝ 🤖 ➝ 📱
+      </div>
+      <div class="loader"></div>
+    </div>
+
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>
